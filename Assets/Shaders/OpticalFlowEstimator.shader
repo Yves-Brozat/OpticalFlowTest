@@ -5,10 +5,14 @@ HLSLINCLUDE
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 
+SamplerState sampler_MainTex;
 Texture2D _MainTex;
 Texture2D _PrevTex;
+Texture2D _PrevFlow;
 StructuredBuffer<float4> _DiffMask;
 float _Threshold;
+float _Amplitude;
+float _Smoothness;
 
 static const int kWindowWidth = 5;
 
@@ -97,12 +101,28 @@ float4 FragmentFlow(float4 position : SV_Position,
     // Solve
     float2 v = mul(Inverse(ATWA), ATWb);
 
+    // Apply amplitude multiplier
+    v *= _Amplitude;
+
     // Apply threshold: if motion magnitude is below threshold, set to zero
     float magnitude = length(v);
     if (magnitude < _Threshold)
         v = 0;
 
     return float4(v, 0, _DiffMask[0].x);
+}
+
+float4 FragmentSmooth(float4 position : SV_Position,
+                      float2 texCoord : TEXCOORD) : SV_Target
+{
+    // Lissage temporel : interpolation entre le flow actuel et le flow précédent
+    float2 currentFlow = _MainTex.Sample(sampler_MainTex, texCoord).xy;
+    float2 previousFlow = _PrevFlow.Sample(sampler_MainTex, texCoord).xy;
+
+    // Lerp basé sur _Smoothness (0 = pas de lissage, 0.9 = très smooth)
+    float2 smoothedFlow = lerp(currentFlow, previousFlow, _Smoothness);
+
+    return float4(smoothedFlow, 0, 1);
 }
 
 ENDHLSL
@@ -125,6 +145,15 @@ ENDHLSL
             HLSLPROGRAM
             #pragma vertex Vertex
             #pragma fragment FragmentFlow
+            ENDHLSL
+        }
+        Pass
+        {
+            ZTest Always ZWrite Off Cull Off
+            Blend Off
+            HLSLPROGRAM
+            #pragma vertex Vertex
+            #pragma fragment FragmentSmooth
             ENDHLSL
         }
     }
