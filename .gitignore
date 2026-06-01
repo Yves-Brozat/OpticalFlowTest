@@ -10,3 +10,7 @@ Desktop.ini
 /UserSettings
 
 /*.mp4
+
+# Visual Studio
+.vs/
+Assets/.vs/
