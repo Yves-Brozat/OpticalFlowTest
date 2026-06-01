@@ -12,6 +12,13 @@ public sealed class OpticalFlowEstimator : MonoBehaviour
 
     #endregion
 
+    #region Editable properties
+
+    [SerializeField, Range(0f, 1f), Tooltip("Seuil de détection de mouvement (filtre le bruit)")]
+    float _motionThreshold = 0.001f;
+
+    #endregion
+
     #region Project asset references
 
     [SerializeField, HideInInspector] ComputeShader _diffDetector = null;
@@ -66,6 +73,7 @@ public sealed class OpticalFlowEstimator : MonoBehaviour
         _diffDetector.Dispatch(0, 1, 1, 1);
 
         _blitter.Material.SetTexture("_PrevTex", _buffer.prev);
+        _blitter.Material.SetFloat("_Threshold", _motionThreshold);
         _blitter.Run(_buffer.cur, _output.grad, 0);
 
         _blitter.Material.SetBuffer("_DiffMask", _diffMask);

@@ -8,6 +8,10 @@ public sealed class OpticalFlowVisualizer : MonoBehaviour
     [SerializeField] ImageSource _source = null;
     [SerializeField] OpticalFlowEstimator _estimator = null;
 
+    [Header("Display Options")]
+    [SerializeField, Tooltip("Affiche ou masque le flux de la webcam")]
+    bool _showWebcamFeed = true;
+
     [HideInInspector, SerializeField] Mesh _mesh = null;
     [HideInInspector, SerializeField] Shader _shader = null;
 
@@ -21,6 +25,8 @@ public sealed class OpticalFlowVisualizer : MonoBehaviour
 
     void Update()
     {
+        if (!_showWebcamFeed) return;
+
         _material.mainTexture = _source.AsTexture;
         _material.SetTexture("_FlowTex", _estimator.AsRenderTexture);
         Graphics.DrawMesh

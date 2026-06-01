@@ -12,10 +12,6 @@ VisualEffectResource:
     m_RendererSettings:
       motionVectorGenerationMode: 0
       shadowCastingMode: 0
-      rayTracingMode: 0
-      receiveShadows: 0
-      reflectionProbeUsage: 0
-      lightProbeUsage: 0
     m_CullingFlags: 3
     m_UpdateMode: 0
     m_PreWarmDeltaTime: 0.05
@@ -70,8 +66,8 @@ MonoBehaviour:
   m_CustomAttributes:
   - {fileID: 114350483966675113}
   m_ParameterInfo:
-  - name: ImageSource
-    path: ImageSource
+  - name: OpticalFlow
+    path: OpticalFlow
     tooltip: 
     space: -1
     spaceable: 0
@@ -86,8 +82,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: OpticalFlow
-    path: OpticalFlow
+  - name: ImageSource
+    path: ImageSource
     tooltip: 
     space: -1
     spaceable: 0
@@ -151,7 +147,7 @@ MonoBehaviour:
     enumValues: []
     descendantCount: 0
   m_ImportDependencies: []
-  m_GraphVersion: 18
+  m_GraphVersion: 19
   m_ResourceVersion: 1
   m_SubgraphDependencies: []
   m_CategoryPath: 
@@ -177,8 +173,9 @@ MonoBehaviour:
       width: 167
       height: 100
     contents: Target Position = UV
-    theme: Classic
+    theme: 
     textSize: Small
+    colorTheme: 1
   categories: []
   uiBounds:
     serializedVersion: 2
@@ -209,7 +206,7 @@ MonoBehaviour:
   - {fileID: 114350483966674979}
   m_ExposedName: OpticalFlow
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 0
   m_Category: 
   m_Min:
     m_Type:
@@ -4158,7 +4155,7 @@ MonoBehaviour:
   - {fileID: 114350483966675236}
   m_ExposedName: LineStride
   m_Exposed: 0
-  m_Order: 5
+  m_Order: 1
   m_Category: 
   m_Min:
     m_Type:
@@ -5544,7 +5541,7 @@ MonoBehaviour:
   - {fileID: 114350483966675294}
   m_ExposedName: ImageSource
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 2
   m_Category: 
   m_Min:
     m_Type:
@@ -5644,6 +5641,7 @@ MonoBehaviour:
   sortingPriority: 0
   m_SubOutputs:
   - {fileID: 114350483966675301}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 0
   flipbookLayout: 0
@@ -6914,7 +6912,7 @@ MonoBehaviour:
   - {fileID: 114350483966675353}
   m_ExposedName: BlockPicker
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:
@@ -7363,7 +7361,7 @@ MonoBehaviour:
   - {fileID: 114350483966675383}
   m_ExposedName: ShowFlow
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:
@@ -7444,7 +7442,7 @@ MonoBehaviour:
   - {fileID: 114350483966675385}
   m_ExposedName: ShowBlock
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 5
   m_Category: 
   m_Min:
     m_Type:

@@ -8,6 +8,7 @@ HLSLINCLUDE
 Texture2D _MainTex;
 Texture2D _PrevTex;
 StructuredBuffer<float4> _DiffMask;
+float _Threshold;
 
 static const int kWindowWidth = 5;
 
@@ -95,6 +96,11 @@ float4 FragmentFlow(float4 position : SV_Position,
 
     // Solve
     float2 v = mul(Inverse(ATWA), ATWb);
+
+    // Apply threshold: if motion magnitude is below threshold, set to zero
+    float magnitude = length(v);
+    if (magnitude < _Threshold)
+        v = 0;
 
     return float4(v, 0, _DiffMask[0].x);
 }
