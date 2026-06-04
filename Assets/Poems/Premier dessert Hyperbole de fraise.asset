@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c26f0ea181b58049b8a6db9d912530d, type: 3}
+  m_Name: Premier dessert Hyperbole de fraise
+  m_EditorClassIdentifier: Assembly-CSharp::OpticalFlowTest.PoemAsset
+  title: L'hyperbole de fraise
+  author: 
+  lines:
+  - "Sur cet immense cousin de cr\xE8me  "
+  - "Jamais personne n'a pu s\u2019endormir "
+  - "Les yeux l\u2019admirent et r\xEAvent de la d\xE9vorer "
+  - "La reine Fraise, couronn\xE9e d\u2019une feuille de menthe "
+  - "Drap\xE9e dans ce rouge vert, la gauche est euphorique "
+  - 'Si vous ne l''avez pas fait, parlez de politique  '
+  - "Sans vous f\xE2cher, parait que \xE7a tache  "
+  category: 

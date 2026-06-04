@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c26f0ea181b58049b8a6db9d912530d, type: 3}
+  m_Name: "Deuxieme plat Gratin d'h\xE9mistiche"
+  m_EditorClassIdentifier: Assembly-CSharp::OpticalFlowTest.PoemAsset
+  title: "Deuxi\xE8me plat : Le gratin d\u2019h\xE9mistiche "
+  author: 
+  lines:
+  - "Des moiti\xE9s de l\xE9gumes pleins de soleil  "
+  - "Pr\xE9cis\xE9ment tranch\xE9s puis m\xE9lang\xE9s sans regarder "
+  - "Comme citoyens dans soci\xE9t\xE9"
+  - "Sous le parasol on s\u2019huile de tournesol"
+  - "Lentement r\xF4tis, ils prennent le temps "
+  - 'Admirez le confit, les canards nous l''envient '
+  - "Cherchez les saveurs de vos c\u0153urs "
+  - "Comme des p\xEAcheurs dans la Durance  "
+  - "Il faut \xEAtre patient r\xE9p\xE8tent les mets  "
+  - "Tout vient \xE0 point \xE0 qui sait \xEAtre tendre  "
+  category: 

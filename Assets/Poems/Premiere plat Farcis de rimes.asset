@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c26f0ea181b58049b8a6db9d912530d, type: 3}
+  m_Name: Premiere plat Farcis de rimes
+  m_EditorClassIdentifier: Assembly-CSharp::OpticalFlowTest.PoemAsset
+  title: 'Premier plat : Farcis de rimes '
+  author: 
+  lines:
+  - "C\u2019est un plat dont l\u2019\xE9t\xE9 raffole "
+  - 'Chauds froids pour faire sortir de belles paroles '
+  - "Farcis de rimes, consonnances interg\xE9n\xE9rationnelles"
+  - "Elev\xE9es six mois en fut de jeunes rationnels"
+  - 'Ici seul le persil est plat  '
+  - "Tout le reste s\u2019euphorise c'est l'\xE9clat "
+  - "L\u2019assiette se vide les yeux se remplissent   "
+  - 'Des larmes de vins blanc se forment et grandissent '
+  - "Puis d\xE9glacent vos visages pour en d\xE9coller les sucs "
+  - "C\u2019est maintenant que se d\xE9guste "
+  - "Le meilleur de vous-m\xEAme  "
+  category: 

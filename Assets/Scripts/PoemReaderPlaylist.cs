@@ -26,6 +26,7 @@ public class PoemZone
     // État interne
     [HideInInspector] public int currentPoemIndex = 0;
     [HideInInspector] public bool isReading = false;
+    [HideInInspector] public bool hasStarted = false; // Pour savoir si la zone a déjà démarré au moins une fois
     [HideInInspector] public Coroutine readingCoroutine = null;
 }
 
@@ -39,6 +40,10 @@ public class PoemReaderPlaylist : MonoBehaviour
     [Header("Zones Configuration")]
     [SerializeField, Tooltip("Configuration des 8 zones de lecture")]
     PoemZone[] _zones = new PoemZone[8];
+
+    [Header("Global Controls")]
+    [SerializeField, Tooltip("Touche pour réinitialiser toutes les zones")]
+    Key _resetKey = Key.R;
 
     [Header("Timing")]
     [SerializeField, Range(0.01f, 0.5f), Tooltip("Délai entre chaque lettre (secondes)")]
@@ -66,8 +71,14 @@ public class PoemReaderPlaylist : MonoBehaviour
             {
                 zone.textDisplay.text = "";
                 zone.currentPoemIndex = 0;
+                zone.hasStarted = false;
             }
         }
+    }
+
+    void OnDestroy()
+    {
+        // Nettoyer si nécessaire (placeholder pour futures fonctionnalités)
     }
 
     void Update()
@@ -83,12 +94,21 @@ public class PoemReaderPlaylist : MonoBehaviour
             // Si la touche est pressée
             if (Keyboard.current[zone.triggerKey].wasPressedThisFrame)
             {
-                // Si un poème est déjà en lecture dans cette zone
+                // Arrêter le poème en cours s'il y en a un
                 if (zone.isReading)
                 {
-                    // Arrêter le poème actuel et passer au suivant
                     StopZone(i);
+                }
+
+                // Si ce n'est pas la première fois, passer au suivant
+                if (zone.hasStarted)
+                {
                     zone.currentPoemIndex = (zone.currentPoemIndex + 1) % zone.poems.Length;
+                }
+                else
+                {
+                    // Premier appui : marquer comme démarré
+                    zone.hasStarted = true;
                 }
 
                 // Démarrer le poème actuel
@@ -100,6 +120,12 @@ public class PoemReaderPlaylist : MonoBehaviour
         if (Keyboard.current[Key.Escape].wasPressedThisFrame)
         {
             StopAllZones();
+        }
+
+        // Touche Reset pour réinitialiser toutes les zones
+        if (Keyboard.current[_resetKey].wasPressedThisFrame)
+        {
+            ResetAllZones();
         }
     }
 
@@ -220,6 +246,7 @@ public class PoemReaderPlaylist : MonoBehaviour
 
         StopZone(zoneIndex);
         zone.currentPoemIndex = 0;
+        zone.hasStarted = false; // Réinitialiser le flag de démarrage
 
         if (zone.textDisplay != null)
             zone.textDisplay.text = "";

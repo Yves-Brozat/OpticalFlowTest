@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c26f0ea181b58049b8a6db9d912530d, type: 3}
+  m_Name: "Premiere entr\xE9e Carottes"
+  m_EditorClassIdentifier: Assembly-CSharp::OpticalFlowTest.PoemAsset
+  title: "Carottes \xE0 la c\xE9sure"
+  author: 
+  lines:
+  - 'Duxelles dans la longueur  '
+  - "Huit duchesses cisel\xE9es d\u2019un m\xEAme royaume sucr\xE9  "
+  - "Sont l\xE0 pour vous \xE9gailler "
+  - 'Les carottes sont crues les victimes les envient  '
+  - "A la c\xE9sure une vinaigrette vient les surmonter  "
+  - "C\u2019est la douceur de dix-huit heures \xE9mulsionn\xE9es "
+  - "Une butte magique orang\xE9e vous \xE9merveille  "
+  - 'Dans votre assiette on dirait Montmartre  '
+  category: 
