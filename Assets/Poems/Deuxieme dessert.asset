@@ -15,7 +15,7 @@ MonoBehaviour:
   title: Deuxieme dessert Anaphore en chocolat
   author: 
   lines:
-  - "Il y a une cuill\xE8er chocolat\xE9e "
+  - "Il y a une cuill\xE8re chocolat\xE9e "
   - "Qui r\xE9veille vos papilles "
   - "Il y a un chaos rapp\xE9 "
   - 'Qui surmonte la montagne froide '
@@ -24,4 +24,5 @@ MonoBehaviour:
   - 'Il y a une voile '
   - 'Qui se gonfle de gourmandise '
   - 'Bon voyage sur la mer cacao '
+  textAlignment: 260
   category: 

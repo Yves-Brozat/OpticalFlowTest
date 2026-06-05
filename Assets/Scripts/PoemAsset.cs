@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 namespace OpticalFlowTest {
 
@@ -24,6 +25,10 @@ public class PoemAsset : ScriptableObject
         "Deuxième ligne",
         "Troisième ligne"
     };
+
+    [Header("Text Styling")]
+    [Tooltip("Alignement du texte pour ce poème")]
+    public TextAlignmentOptions textAlignment = TextAlignmentOptions.Left;
 
     [Header("Metadata (optionnel)")]
     [Tooltip("Catégorie ou tag pour organiser")]

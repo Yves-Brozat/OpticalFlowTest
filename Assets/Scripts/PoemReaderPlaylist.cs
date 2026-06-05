@@ -23,6 +23,11 @@ public class PoemZone
     [Tooltip("Liste des poèmes à afficher successivement dans cette zone")]
     public PoemAsset[] poems = new PoemAsset[0];
 
+    [Header("VFX Force")]
+    [Tooltip("Index de la force VFX à activer pour cette zone (0-7)")]
+    [Range(0, 7)]
+    public int forceIndex = 0;
+
     // État interne
     [HideInInspector] public int currentPoemIndex = 0;
     [HideInInspector] public bool isReading = false;
@@ -59,12 +64,37 @@ public class PoemReaderPlaylist : MonoBehaviour
     [SerializeField, Tooltip("Ajouter un saut de ligne après chaque phrase")]
     bool _addLineBreaks = false;
 
+    [Header("VFX Integration")]
+    [SerializeField, Tooltip("Référence au Visual Effect pour contrôler les forces")]
+    UnityEngine.VFX.VisualEffect _visualEffect = null;
+
+    [SerializeField, Tooltip("Noms des propriétés VFX pour les 8 forces")]
+    string[] _forcePropertyNames = new string[8]
+    {
+        "Force1_Enabled",
+        "Force2_Enabled",
+        "Force3_Enabled",
+        "Force4_Enabled",
+        "Force5_Enabled",
+        "Force6_Enabled",
+        "Force7_Enabled",
+        "Force8_Enabled"
+    };
+
     [Header("Debug")]
     [SerializeField] bool _showDebugLogs = true;
 
+    // État des forces VFX (8 forces, une par zone)
+    private bool[] _forceStates = new bool[8];
+
     void Start()
     {
-        // Initialiser tous les textes vides
+        // Initialiser tous les textes vides et les forces
+        for (int i = 0; i < 8; i++)
+        {
+            _forceStates[i] = false;
+        }
+
         foreach (var zone in _zones)
         {
             if (zone != null && zone.textDisplay != null)
@@ -171,6 +201,15 @@ public class PoemReaderPlaylist : MonoBehaviour
         zone.isReading = true;
         zone.textDisplay.text = "";
 
+        // Appliquer l'alignement spécifique au poème
+        zone.textDisplay.alignment = currentPoem.textAlignment;
+
+        // Activer la force VFX correspondante
+        if (zone.forceIndex >= 0 && zone.forceIndex < 8)
+        {
+            SetForceState(zone.forceIndex, true);
+        }
+
         if (_showDebugLogs)
             Debug.Log($"[PoemReaderPlaylist] ▶ Zone {zoneIndex} - Poème {zone.currentPoemIndex + 1}/{zone.poems.Length}");
 
@@ -194,6 +233,12 @@ public class PoemReaderPlaylist : MonoBehaviour
         }
 
         zone.isReading = false;
+
+        // Désactiver la force VFX correspondante
+        if (zone.forceIndex >= 0 && zone.forceIndex < 8)
+        {
+            SetForceState(zone.forceIndex, false);
+        }
 
         if (_showDebugLogs)
             Debug.Log($"[PoemReaderPlaylist] ⏹ Zone {zoneIndex} arrêtée");
@@ -319,6 +364,13 @@ public class PoemReaderPlaylist : MonoBehaviour
 
         // Fin du poème
         zone.isReading = false;
+
+        // Désactiver la force VFX correspondante
+        if (zone.forceIndex >= 0 && zone.forceIndex < 8)
+        {
+            SetForceState(zone.forceIndex, false);
+        }
+
         if (_showDebugLogs)
             Debug.Log($"[PoemReaderPlaylist] ✅ Zone {zoneIndex} - Poème {zone.currentPoemIndex + 1} terminé !");
     }
@@ -384,6 +436,49 @@ public class PoemReaderPlaylist : MonoBehaviour
     {
         if (zoneIndex < 0 || zoneIndex >= _zones.Length) return false;
         return _zones[zoneIndex]?.isReading ?? false;
+    }
+
+    /// <summary>
+    /// Retourne l'état d'activation d'une force VFX
+    /// </summary>
+    public bool GetForceState(int forceIndex)
+    {
+        if (forceIndex < 0 || forceIndex >= 8) return false;
+        return _forceStates[forceIndex];
+    }
+
+    /// <summary>
+    /// Définit l'état d'une force VFX et met à jour immédiatement le Visual Effect
+    /// </summary>
+    private void SetForceState(int forceIndex, bool enabled)
+    {
+        if (forceIndex < 0 || forceIndex >= 8) return;
+
+        _forceStates[forceIndex] = enabled;
+
+        // Mettre à jour immédiatement le VFX si la référence existe
+        if (_visualEffect != null && forceIndex < _forcePropertyNames.Length)
+        {
+            string propertyName = _forcePropertyNames[forceIndex];
+            if (_visualEffect.HasBool(propertyName))
+            {
+                _visualEffect.SetBool(propertyName, enabled);
+
+                if (_showDebugLogs)
+                {
+                    string stateText = enabled ? "activée" : "désactivée";
+                    Debug.Log($"[PoemReaderPlaylist] 🌀 Force {forceIndex} ({propertyName}) {stateText}");
+                }
+            }
+            else if (_showDebugLogs)
+            {
+                Debug.LogWarning($"[PoemReaderPlaylist] ⚠ Propriété VFX '{propertyName}' introuvable !");
+            }
+        }
+        else if (_showDebugLogs && _visualEffect == null)
+        {
+            Debug.LogWarning($"[PoemReaderPlaylist] ⚠ Visual Effect non assigné. Force {forceIndex} changée en mémoire seulement.");
+        }
     }
 }
 

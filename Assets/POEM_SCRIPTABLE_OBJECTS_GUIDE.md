@@ -22,6 +22,7 @@
 	 [0] "Les sanglots longs"
 	 [1] "Des violons"
 	 [2] "De l'automne"
+   Text Alignment: Left (ou Right, Center, Justified...)
    ```
 
 4. Répétez pour créer tous vos poèmes :
@@ -198,6 +199,7 @@ Créez un **"Template.asset"** vide et dupliquez-le pour chaque nouveau poème.
 Title: "Chanson d'automne"
 Author: "Paul Verlaine"
 Lines: ["Les sanglots longs", "Des violons", ...]
+Text Alignment: Left (ou Right, Center, Justified...)
 Category: "Classique"
 ```
 
@@ -270,6 +272,16 @@ Poems/
 ├─ Slam/
 └─ Citations/
 ```
+
+### Personnaliser l'alignement par poème
+
+Chaque poème peut avoir son propre alignement :
+- **Left** : Poésie classique, texte standard
+- **Center** : Haïkus, citations courtes
+- **Right** : Effets visuels, contraste
+- **Justified** : Prose poétique, textes longs
+
+L'alignement change automatiquement à chaque nouveau poème !
 
 ### Utiliser la Category pour filtrer
 
